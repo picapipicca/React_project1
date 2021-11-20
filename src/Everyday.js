@@ -5,26 +5,41 @@ import styled from 'styled-components';
 
 const Everyday = (props) => {
     let history= useHistory();
-    //요일 만들기
+
+    //요일 array
     const day = ["일","월","화","수","목","금","토"];
 
-        //1~5 랜덤숫자 7개 새로운 배열안에 집어넣기
+    //7개의 랜덤숫자(1~5) 빈 배열에 집어넣기
     const arr = [];
     for (let i =0; i<day.length; i++) { 
         const random_num = Math.floor(Math.random()*(5));
+        console.log(random_num)
         arr.push(random_num);
     }
-    const circle = [0,0,0,0,0]
+        const circles = Array.from ({length:5},(v,i) => i);
+        console.log(circles);
 
+    //뷰로 나타나는 부분
     return(
         <>
         <h3>내 일주일은?</h3>
+
+         {/* callback 함수를 day array의 data 수만큼 불러 함수의 반환값으로 새로운 배열생성 */}
         {day.map((day,i) => {
             return(
-                <Box key={day}>
+                <Box key={i}>
                     <h3 style={{margin : "10px"}}>{day}</h3>
-                    {circle.map((circle,index)=>{
-                    return <Circle key={circle[i]} className={index <= arr[i] ? "active" : null } />})}
+                    {day.from}
+                    {circles.map((circle,index)=>{
+                    return <Circle key={index} className={index <= arr[i] ? "active" : null } />})}
+
+                    {/* 다른방법 : 원 5개를 랜덤으로 불러온 (1~5) 숫자보다 같거나 작으면 노란색으로 칠해준다 5개동그라미 각각실행 
+                    {/* <Circle className={1 <= arr[i] ? "active" : null }/> 
+                    <Circle className={2 <= arr[i] ? "active" : null }/>
+                    <Circle className={3 <= arr[i] ? "active" : null }/>
+                    <Circle className={4 <= arr[i] ? "active" : null }/>
+                    <Circle className={5 <= arr[i] ? "active" : null }/> */}
+
                     <ArrowRight onClick = {()=> {
                         history.push(`/rating/${day}`)
                     }}/>
