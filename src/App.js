@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import React from 'react';
+import styled from "styled-components";
+import { Route } from 'react-router-dom';
 import './App.css';
+import Rating from './Rating';
+import Everyday from './Everyday';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Container>
+        <Route path = "/" exact>
+              <Everyday />
+        </Route>
+        <Route path ="/rating/:day" exact>
+            <Rating/>
+        </Route> 
+      </Container>
     </div>
   );
 }
+
+const Container = styled.div`
+  max-width: 350px; 
+  width: 80vw; 
+  height: 90vh; 
+  margin: 5vh auto; 
+  padding: 5vh 0px; 
+  border: 1px solid rgb(221, 221, 221); 
+  box-sizing: border-box; 
+  border-radius: 5px;
+`;
+
 
 export default App;
